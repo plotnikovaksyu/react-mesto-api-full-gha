@@ -1,0 +1,7 @@
+.grid__element {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    perspective: 1px;
+    border-radius: 10px;
+}

@@ -1,0 +1,7 @@
+@media screen and (max-width: 680px) {
+    .popup__container_checking {
+        max-width: 282px;
+        min-height: 0;
+        padding: 25px 22px;
+    }
+}

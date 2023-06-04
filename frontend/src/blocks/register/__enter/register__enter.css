@@ -1,0 +1,11 @@
+.register__enter {
+    color: white;
+    text-decoration-line: none;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.register__enter:hover {
+    opacity: .6;
+    cursor: pointer;
+}

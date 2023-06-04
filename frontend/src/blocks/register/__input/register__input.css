@@ -1,0 +1,25 @@
+.register__input {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: white;
+    width: 100%;
+    min-height: 27px;
+    padding: 0;
+    text-align: start;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid rgba(192, 192, 192, 0.8);
+    margin-top: 25px;
+    background-color: black;
+}
+
+.register__input:hover {
+    cursor: pointer;
+}
+
+.register__input::placeholder {
+    font-weight: 400;
+    color: #CCCCCC;
+}

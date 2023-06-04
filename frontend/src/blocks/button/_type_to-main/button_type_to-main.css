@@ -1,0 +1,13 @@
+.button_type_to-main {
+    color: white;
+    text-decoration-line: none;
+    color: white;
+    text-decoration-line: none;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.button_type_to-main:hover {
+    opacity: .6;
+    cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.header__account {
+    display: flex;
+    gap: 24px;
+}
+
+/* @media screen and (max-width: 680px) {
+    .header__account {
+        flex-direction: column;
+    }
+} */

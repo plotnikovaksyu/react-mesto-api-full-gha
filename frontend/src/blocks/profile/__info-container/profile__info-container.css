@@ -1,0 +1,15 @@
+.profile__info-container {
+    align-items: center;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    color: #FFFFFF;
+    display: flex;
+    gap: 30px;
+}
+
+@media screen and (max-width: 680px) {
+    .profile__info-container {
+        flex-direction: column;
+        gap: 22.25px;
+    }
+}

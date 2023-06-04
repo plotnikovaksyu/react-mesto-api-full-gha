@@ -1,0 +1,22 @@
+.grid__delete-button {
+    visibility: visible;
+    background-color: transparent;
+    border: none;
+    width: 18px;
+    height: 19px;
+    background-image: url('../../../images/TrashButton.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1;
+    padding: 0;
+    cursor: pointer;
+}
+
+.grid__delete-button:hover {
+    opacity: .6;
+    transition: opacity .1s ease .1s;
+}
