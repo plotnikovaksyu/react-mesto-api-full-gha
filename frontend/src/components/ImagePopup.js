@@ -1,6 +1,6 @@
 function ImagePopup({ card, onClose }) { 
     function closePopupByOverlayClick(evt) {
-        if (evt.target !== evt.currenTarget) {
+        if (evt.target.classList.contains('popup')) {
             onClose(evt)
         }
     }

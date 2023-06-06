@@ -13,12 +13,6 @@ const { correctUrl } = require('../utils/constants');
 const usersRoter = express.Router();
 
 usersRoter.get('/users', getUsers);
-// usersRoter.get('/users/me', getUser);
-// usersRoter.get('/users/:userId', celebrate({
-//   params: Joi.object().keys({
-//     userId: Joi.string().required().length(24).hex(),
-//   }),
-// }), getUserById);
 usersRoter.get('/users/me', getUserById);
 usersRoter.get('/users/:userId', celebrate({
   params: Joi.object().keys({

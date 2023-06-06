@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 function PopupWithForm({ name, title, children, state, label, buttonText, isOpen, onClose, onSubmit }) {
 
     function closePopupByOverlayClick(evt) {
-        if (evt.target !== evt.currenTarget) {
+        if (evt.target.classList.contains('popup')) {
             onClose(evt)
         }
     }
