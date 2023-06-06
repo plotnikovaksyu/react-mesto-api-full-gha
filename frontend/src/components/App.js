@@ -135,16 +135,6 @@ function App() {
                 console.log((`${err}`))
             })
     }
-    // function handleUpdateUser({name , about}) {
-    //     api.editProfilePopup(name , about)
-    //         .then((user) => {
-    //             setCurrentUser(user)
-    //             closeAllPopups()
-    //         })
-    //         .catch((err) => {
-    //             console.log((`${err}`))
-    //         })
-    // }
 
     //обновить аватар
     function handleUpdateAvatar(data) {
@@ -157,16 +147,7 @@ function App() {
                 console.log((`${err}`))
             })
     }
-    // function handleUpdateAvatar({avatar}) {
-    //     api.updateAvatar(avatar)
-    //         .then((user) => {
-    //             setCurrentUser(user)
-    //             closeAllPopups()
-    //         })
-    //         .catch((err) => {
-    //             console.log((`${err}`))
-    //         })
-    // }
+
     //добавить карточку
     function handleAddPlaceSubmit(evt) {
         api.addNewCard({
@@ -224,8 +205,8 @@ function App() {
                 .then((res) => {
                     if (res) {
                         setLoggedIn(true)
-                        console.log(email)
-                        setEmail(email)
+                        console.log(res.email)
+                        setEmail(res.email)
                         // setEmail(res.data.email)
                         navigate('/', { replace: true })
                     }

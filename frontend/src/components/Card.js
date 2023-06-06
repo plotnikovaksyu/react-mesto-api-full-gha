@@ -5,7 +5,8 @@ function Card({ card, onCardClick, onConfirmDelete, onCardLike}) {
 
     const currentUser = useContext(CurrentUserContext);
     
-    const isOwn = card.owner._id === currentUser._id;
+    // const isOwn = card.owner._id === currentUser._id;
+    const isOwn = (card.owner._id || card.owner === currentUser._id);
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     const cardDeleteButtonClassName = (
         `grid__delete-button ${isOwn ? 'grid__delete-button_visible' : 'grid__delete-button_hidden'}`
@@ -30,7 +31,6 @@ function Card({ card, onCardClick, onConfirmDelete, onCardLike}) {
 
     return (
         <li className="grid__list">
-            {/* <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить" onClick={handleDeleteClick}></button> */}
             <button className={cardDeleteButtonClassName} type="button" aria-label="Удалить" onClick={confirmDeleteCard}></button>
             <article className="grid__element">
                 <img className="grid__image" src={card.link} alt={card.name} onMouseDown={handleClick} />
