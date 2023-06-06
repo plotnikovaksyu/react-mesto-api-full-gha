@@ -13,12 +13,18 @@ const { correctUrl } = require('../utils/constants');
 const usersRoter = express.Router();
 
 usersRoter.get('/users', getUsers);
-usersRoter.get('/users/me', getUser);
+// usersRoter.get('/users/me', getUser);
+// usersRoter.get('/users/:userId', celebrate({
+//   params: Joi.object().keys({
+//     userId: Joi.string().required().length(24).hex(),
+//   }),
+// }), getUserById);
+usersRoter.get('/users/me', getUserById);
 usersRoter.get('/users/:userId', celebrate({
   params: Joi.object().keys({
     userId: Joi.string().required().length(24).hex(),
   }),
-}), getUserById);
+}), getUser);
 usersRoter.patch('/users/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),

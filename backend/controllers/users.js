@@ -65,15 +65,15 @@ const createUser = (req, res, next) => {
       password: hash,
     })
       .then((user) => {
-        // const { _id } = user;
-        // return res.status(201).send({
-        //   name,
-        //   about,
-        //   avatar,
-        //   email,
-        //   _id,
-        // });
-        res.status(201).send(user);
+        const { _id } = user;
+        return res.status(201).send({
+          name,
+          about,
+          avatar,
+          email,
+          _id,
+        });
+        // res.status(201).send(user);
       })
       // .then((user) => {
       //   res.status(201).send(user);
