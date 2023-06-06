@@ -7,7 +7,7 @@ function Card({ card, onCardClick, onConfirmDelete, onCardLike}) {
     
     // const isOwn = card.owner._id === currentUser._id;
     const isOwn = (card.owner._id || card.owner === currentUser._id);
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id || i._id === currentUser._id);
     const cardDeleteButtonClassName = (
         `grid__delete-button ${isOwn ? 'grid__delete-button_visible' : 'grid__delete-button_hidden'}`
     )
