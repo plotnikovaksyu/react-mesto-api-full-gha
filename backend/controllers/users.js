@@ -23,7 +23,6 @@ const getUser = (req, res, next) => {
       if (!user) {
         throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
       }
-      // res.send({ data: user });
       return res.send(user);
     })
     .catch((err) => {
@@ -73,11 +72,7 @@ const createUser = (req, res, next) => {
           email,
           _id,
         });
-        // res.status(201).send(user);
       })
-      // .then((user) => {
-      //   res.status(201).send(user);
-      // })
       .catch((err) => {
         if (err.code === 11000) {
           next(new CONFLICT_ERROR('Пользователь с такой почтой уже зарегистрирован'));
@@ -144,15 +139,15 @@ const login = (req, res, next) => {
             throw new UNAUTHORIZED_ERROR('Неправильные почта или пароль');
           }
           const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
-          res.status(200).send({ token });
-          // res.status(200).send({
-          // name: user.name,
-          // about: user.about,
-          // avatar: user.avatar,
-          // email: user.email,
-          // _id: user._id,
-          // token,
-          // });
+          // res.status(200).send({ token });
+          res.status(200).send({
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+            _id: user._id,
+            token,
+          });
         });
     })
     .catch((err) => {

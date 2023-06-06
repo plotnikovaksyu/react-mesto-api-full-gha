@@ -207,7 +207,7 @@ function App() {
                 setIsInfoTooltipOpen(true)
                 setIsRegistrationMessage({ status: true, message: 'С возвращением!' }); //выдать попап о регистрации
                 navigate('/', { replace: true })
-                // console.log(data.token)
+                console.log(data.token)
             })
             .catch((err) => {
                 console.log((`${err}`))
@@ -224,8 +224,9 @@ function App() {
                 .then((res) => {
                     if (res) {
                         setLoggedIn(true)
-                        // setEmail(email)
-                        setEmail(res.data.email)
+                        console.log(email)
+                        setEmail(email)
+                        // setEmail(res.data.email)
                         navigate('/', { replace: true })
                     }
                 })

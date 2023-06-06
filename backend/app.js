@@ -44,13 +44,13 @@ app.use(auth);
 app.use(usersRoter);
 
 app.use(cardsRoter);
-app.use(errorLogger);
-app.use(errors());
 app.use(defaultError);
-
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемая страница не существует'));
 });
+
+app.use(errorLogger);
+app.use(errors());
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

@@ -6,7 +6,7 @@ const FORBIDDEN_ERROR = require('../errors/forbiddenError');
 
 // получить все карточки
 const getCards = (req, res, next) => {
-  Card.find()
+  Card.find({})
     .then((cards) => {
       res.send(cards);
     })
