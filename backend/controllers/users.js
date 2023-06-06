@@ -65,14 +65,15 @@ const createUser = (req, res, next) => {
       password: hash,
     })
       .then((user) => {
-        const { _id } = user;
-        return res.status(201).send({
-          name,
-          about,
-          avatar,
-          email,
-          _id,
-        });
+        // const { _id } = user;
+        // return res.status(201).send({
+        //   name,
+        //   about,
+        //   avatar,
+        //   email,
+        //   _id,
+        // });
+        res.status(201).send(user);
       })
       // .then((user) => {
       //   res.status(201).send(user);
@@ -143,15 +144,15 @@ const login = (req, res, next) => {
             throw new UNAUTHORIZED_ERROR('Неправильные почта или пароль');
           }
           const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
-          // res.status(200).send({ token });
-          res.status(200).send({
-            name: user.name,
-            about: user.about,
-            avatar: user.avatar,
-            email: user.email,
-            _id: user._id,
-            token,
-          });
+          res.status(200).send({ token });
+          // res.status(200).send({
+          // name: user.name,
+          // about: user.about,
+          // avatar: user.avatar,
+          // email: user.email,
+          // _id: user._id,
+          // token,
+          // });
         });
     })
     .catch((err) => {
