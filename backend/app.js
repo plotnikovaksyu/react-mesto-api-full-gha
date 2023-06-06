@@ -10,21 +10,8 @@ const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
 const { PORT = 3000 } = process.env;
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
-  useNewUrlParser: true,
-});
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
-app.use(cors({
-  origin: [
-    'https://mesto15web.nomoredomains.rocks',
-    'http://mesto15web.nomoredomains.rocks',
-    'https://api.mesto15web.nomoredomains.rocks',
-    'http://api.mesto15web.nomoredomains.rocks',
-    'http://localhost:3000',
-    'http://localhost:3001',
-  ],
-  credentials: true,
-}));
 const { usersRoter } = require('./routes/users');
 const { cardsRoter } = require('./routes/cards');
 const { limiter } = require('./middleware/rate-limiter');
@@ -32,6 +19,7 @@ const { createUser, login } = require('./controllers/users');
 
 const { correctUrl } = require('./utils/constants');
 
+app.use(cors());
 app.use(limiter);
 app.use(express.json());
 app.use(requestLogger);
