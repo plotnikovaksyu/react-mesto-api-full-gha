@@ -9,6 +9,7 @@ const NotFoundError = require('./errors/notFoundError');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
+app.use('*', cors());
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
@@ -19,7 +20,10 @@ const { createUser, login } = require('./controllers/users');
 
 const { correctUrl } = require('./utils/constants');
 
-app.use(cors());
+// app.use(cors({
+//   origin: true,
+//   credentials: true,
+// }));
 app.use(limiter);
 app.use(express.json());
 app.use(requestLogger);
@@ -44,13 +48,13 @@ app.use(auth);
 app.use(usersRoter);
 
 app.use(cardsRoter);
-app.use(defaultError);
 app.all('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемая страница не существует'));
 });
 
 app.use(errorLogger);
 app.use(errors());
+app.use(defaultError);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
