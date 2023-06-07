@@ -9,16 +9,16 @@ const CONFLICT_ERROR = require('../errors/conflictError');
 const UNAUTHORIZED_ERROR = require('../errors/unauthorizedError');
 
 // поиск юзера
-// function findUser(modul, id, res, next) {
-//   return modul.findById(id)
-//     .orFail(() => {
-//       throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-//     })
-//     .then((user) => {
-//       res.send(user);
-//     })
-//     .catch((err) => next(err));
-// }
+function findUser(modul, id, res, next) {
+  return modul.findById(id)
+    .orFail(() => {
+      throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
+    })
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => next(err));
+}
 
 // получить всех юзеров
 const getUsers = (req, res, next) => {
@@ -30,40 +30,40 @@ const getUsers = (req, res, next) => {
 };
 
 // получить юзера по id
-// const getUser = (req, res, next) => {
-//   findUser(User, req.params.userId, res, next);
-// };
-
-// const getUserById = (req, res, next) => {
-//   findUser(User, req.user._id, res, next);
-// };
 const getUser = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-      }
-      return res.send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
-      } else {
-        next(err);
-      }
-    });
+  findUser(User, req.params.userId, res, next);
 };
 
 const getUserById = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-      }
-      return res.send(user);
-    })
-    .catch((err) => next(err));
+  findUser(User, req.user._id, res, next);
 };
+// const getUser = (req, res, next) => {
+//   User.findById(req.params.userId)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
+//       }
+//       return res.send(user);
+//     })
+//     .catch((err) => {
+//       if (err.name === 'CastError') {
+//         next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
+//       } else {
+//         next(err);
+//       }
+//     });
+// };
+
+// const getUserById = (req, res, next) => {
+//   User.findById(req.user._id)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
+//       }
+//       return res.send(user);
+//     })
+//     .catch((err) => next(err));
+// };
 
 // создать юзера
 const createUser = (req, res, next) => {
