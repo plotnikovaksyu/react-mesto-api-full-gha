@@ -25,7 +25,7 @@ app.get('/crash-test', () => {
 
 app.use('/', router);
 app.all('*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемая страница не существует') instanceof Error);
+  next(new NotFoundError('Запрашиваемая страница не существует'));
 });
 
 app.use(errorLogger);

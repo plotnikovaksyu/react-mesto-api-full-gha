@@ -33,32 +33,10 @@ const getUsers = (req, res, next) => {
 // получить юзера по id
 const getUser = (req, res, next) => {
   findUser(User, req.params.userId, res, next);
-  // User.findById(req.params.userId)
-  //   .then((user) => {
-  //     if (!user) {
-  //       throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-  //     }
-  //     return res.send(user);
-  //   })
-  //   .catch((err) => {
-  //     if (err.name === 'CastError') {
-  //       next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
-  //     } else {
-  //       next(err);
-  //     }
-  //   });
 };
 
 const getUserById = (req, res, next) => {
   findUser(User, req.user._id, res, next);
-  // User.findById(req.user._id)
-  //   .then((user) => {
-  //     if (!user) {
-  //       throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-  //     }
-  //     return res.send(user);
-  //   })
-  //   .catch((err) => next(err));
 };
 
 // создать юзера
