@@ -97,7 +97,7 @@ const updateUserInfo = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
       } else {
         next(err);
@@ -117,7 +117,7 @@ const updateAvatar = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
       } else {
         next(err);
@@ -151,7 +151,7 @@ const login = (req, res, next) => {
         });
     })
     .catch((err) => {
-      if (err.name === 'CastError' || err.name === 'ValidationError') {
+      if (err.name === 'ValidationError') {
         next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
       } else {
         next(err);

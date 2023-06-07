@@ -41,25 +41,39 @@ const createCard = (req, res, next) => {
 };
 
 // удалить карточку
+// const deleteCard = (req, res, next) => {
+//   Card.findById(req.params.cardId)
+//     .then((card) => {
+//       if (JSON.stringify(req.user._id) !== JSON.stringify(card.owner)) {
+//         next(new FORBIDDEN_ERROR('Недостаточно прав для удаления карточки'));
+//       } else {
+//         Card.findByIdAndDelete(req.params.cardId)
+//           .then((deletedCard) => {
+//             res.status(200).send(deletedCard);
+//           });
+//       }
+//     })
+//     .catch((err) => {
+//       if (err.name === 'CastError') {
+//         next(new BAD_REQUEST_ERROR('Карточка не найдена'));
+//       } else {
+//         next(new NOT_FOUND_ERROR('Переданы некорректные данные'));
+//       }
+//     });
+// };
 const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
+    .orFail(new BAD_REQUEST_ERROR('Карточка не найдена'))
     .then((card) => {
       if (JSON.stringify(req.user._id) !== JSON.stringify(card.owner)) {
         next(new FORBIDDEN_ERROR('Недостаточно прав для удаления карточки'));
-      } else {
-        Card.findByIdAndDelete(req.params.cardId)
-          .then((deletedCard) => {
-            res.status(200).send(deletedCard);
-          });
       }
+      return Card.findByIdAndDelete(req.params.cardId)
+        .then((deletedCard) => {
+          res.status(200).send(deletedCard);
+        });
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BAD_REQUEST_ERROR('Карточка не найдена'));
-      } else {
-        next(new NOT_FOUND_ERROR('Переданы некорректные данные'));
-      }
-    });
+    .catch(next);
 };
 
 // поставить лайк
