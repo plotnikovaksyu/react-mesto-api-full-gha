@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -8,12 +9,13 @@ const NotFoundError = require('./errors/notFoundError');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
-app.use('*', cors());
+
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 const { limiter } = require('./middleware/rate-limiter');
 
+app.use(cors());
 app.use(limiter);
 app.use(express.json());
 app.use(requestLogger);
