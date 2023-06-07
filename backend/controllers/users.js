@@ -2,7 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
-// const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = require('../utils/constants');
+
 const BAD_REQUEST_ERROR = require('../errors/badRequestError');
 const NOT_FOUND_ERROR = require('../errors/notFoundError');
 const CONFLICT_ERROR = require('../errors/conflictError');
@@ -37,33 +38,6 @@ const getUser = (req, res, next) => {
 const getUserById = (req, res, next) => {
   findUser(User, req.user._id, res, next);
 };
-// const getUser = (req, res, next) => {
-//   User.findById(req.params.userId)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-//       }
-//       return res.send(user);
-//     })
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
-
-// const getUserById = (req, res, next) => {
-//   User.findById(req.user._id)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NOT_FOUND_ERROR('Пользователь по указанному _id не найден');
-//       }
-//       return res.send(user);
-//     })
-//     .catch((err) => next(err));
-// };
 
 // создать юзера
 const createUser = (req, res, next) => {
@@ -158,16 +132,16 @@ const login = (req, res, next) => {
           if (!matched) {
             throw new UNAUTHORIZED_ERROR('Неправильные почта или пароль');
           }
-          // const token = jwt.sign(
-          //   { _id: user._id },
-          //   NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-          //   { expiresIn: '7d' },
-          // );
           const token = jwt.sign(
             { _id: user._id },
-            'dev-secret',
+            NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
             { expiresIn: '7d' },
           );
+          // const token = jwt.sign(
+          //   { _id: user._id },
+          //   'dev-secret',
+          //   { expiresIn: '7d' },
+          // );
           // res.status(200).send({ token });
           res.status(200).send({
             name: user.name,
