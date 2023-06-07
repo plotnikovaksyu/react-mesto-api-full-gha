@@ -73,7 +73,9 @@ const deleteCard = (req, res, next) => {
           res.status(200).send(deletedCard);
         });
     })
-    .catch(next);
+    .catch(() => {
+      next(new NOT_FOUND_ERROR('Переданы некорректные данные'));
+    });
 };
 
 // поставить лайк
