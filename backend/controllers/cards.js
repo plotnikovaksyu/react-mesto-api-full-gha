@@ -43,10 +43,10 @@ const createCard = (req, res, next) => {
 // удалить карточку
 const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
-    .orFail(new BAD_REQUEST_ERROR('Карточка не найдена'))
+    .orFail(new NOT_FOUND_ERROR('Карточка не найдена'))
     .then((card) => {
       if (JSON.stringify(req.user._id) !== JSON.stringify(card.owner)) {
-        next(new FORBIDDEN_ERROR('Недостаточно прав для удаления карточки'));
+        throw new FORBIDDEN_ERROR('Недостаточно прав для удаления карточки');
       }
       return Card.findByIdAndDelete(req.params.cardId)
         .then((deletedCard) => {
@@ -54,7 +54,7 @@ const deleteCard = (req, res, next) => {
         });
     })
     .catch(() => {
-      next(new NOT_FOUND_ERROR('Переданы некорректные данные'));
+      next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
     });
 };
 
