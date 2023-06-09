@@ -53,8 +53,12 @@ const deleteCard = (req, res, next) => {
           res.status(200).send(deletedCard);
         });
     })
-    .catch(() => {
-      next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BAD_REQUEST_ERROR('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
     });
 };
 
